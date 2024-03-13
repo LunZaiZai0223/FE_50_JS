@@ -1,25 +1,15 @@
-// 請實作一個陣列方法，讓任何陣列都可以呼叫 array.last() 方法，這個方法會回傳陣列最後一個元素。如果陣列中沒有元素，則傳回 -1 。可以假設陣列是 JSON.parse 的輸出結果，以及是一個 JSON 陣列。
+// 請實作 Array.prototype.at，該方法會接受一個整數作為輸入，並從陣列中檢索相應元素。除了正整數外，也要能夠處理負整數，負整數會從陣列末尾計算。以下為使用範例
 
-// // 範例1 ：
-// 輸入： nums = [null, {}, 3]
-// 輸出： 3
-// 解釋：呼叫 nums.last() 後傳回最後一個元素： 3。
+// const arr = ["Explain", "This"];
+// arr.at(0); // Explain
+// arr.at(1); // This
+// arr.at(2); // undefined
 
-// // 範例2 ：
-// 輸入： nums = []
-// 輸出： -1
-// 解釋：因為此陣列沒有元素，所以應該傳回-1。
+// arr.at(-1); // This
+// arr.at(-2); // Explain
+// arr.at(-3); // undefined
 
-/**
- * @return {null|boolean|number|string|Array|Object}
- */
-Array.prototype.last = function () {
-	// this 會指向當前叫用此方法的 array
-	const lastIndex = this.length - 1
-	return this[lastIndex] === undefined ? -1 : this[lastIndex]
-};
-
-/**
- * const arr = [1, 2, 3];
- * arr.last(); // 3
- */
+Array.prototype.at = function (index) {
+	// index 從 0 開始數，-1 則是從最尾端數；所以在 [1, 2, 3] index 為 -1 的話，其實是整數 index 2，因此在負數的情況下，從 index + array.length 就可以得到正數時的 index
+	return index >= 0 ? this[index] : this[index + this.length]
+}
