@@ -16,14 +16,13 @@
 // clamp(18, 3, 9); // => 9
 
 const clamp = (number, lower, upper) => {
-	if (number >= lower || number <= upper) {
-		return number
-	}
-
 	if (number > upper) {
 		return upper
 	}
 
+	if (number < lower) {
+		return lower
+	}
 
-	return lower
+	return number
 }
